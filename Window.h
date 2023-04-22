@@ -8,6 +8,6 @@ public:
     bool shouldClose();
     void swapBuffers();
     void pollEvents();
-private:
     GLFWwindow* m_window;
+private:
 };

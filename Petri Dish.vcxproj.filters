@@ -1,11 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Camera2d.cpp">
+      <Filter>Camera\2D-Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="Camera2d.h">
+      <Filter>Camera\2D-Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{e4faf142-e6ef-4ba3-910c-270c0b1f1f52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera\2D-Camera">
+      <UniqueIdentifier>{f32ad863-4755-4ae7-9e21-4b66aede0ada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{6a3d105e-99d0-4777-a329-5a84ad2f8e10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{c928a278-f84f-400d-bb7d-58f47a78c842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{06be4090-caaf-4ab4-9e94-98f7367518fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{15d7dcb8-2a34-45a4-8645-13f00e65a2af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{6223e3f0-0e71-44ff-ba67-0fda9fd8b176}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObjects">
+      <UniqueIdentifier>{e05ea70d-3032-455f-b21e-62a21bf92202}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
