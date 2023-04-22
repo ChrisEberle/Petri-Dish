@@ -1,8 +1,8 @@
 #include "Engine.h"
 
-void Graphics::drawCircle(float x, float y, float radius, int nSeg)
+void Graphics::drawCircle(float x, float y, float radius, int nSeg, int r, int g, int b)
 {
-    glColor3f(253 / 255.0f, 184 / 255.0f, 19 / 255.0f);
+    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(x, y, 0.0f);
@@ -24,8 +24,9 @@ void Graphics::drawCircle(float x, float y, float radius, int nSeg)
     glPopMatrix();
 }
 
-void Graphics::drawTriangle(float x, float y, float radius)
+void Graphics::drawTriangle(float x, float y, float radius, int r, int g, int b)
 {
+    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(x, y, 0.0f);
@@ -45,8 +46,9 @@ void Graphics::drawTriangle(float x, float y, float radius)
     glPopMatrix();
 }
 
-void Graphics::drawCircleOutline(float x, float y, float radius, int nSeg)
+void Graphics::drawCircleOutline(float x, float y, float radius, int nSeg, int r, int g, int b)
 {
+    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(x, y, 0.0f);
@@ -68,12 +70,13 @@ void Graphics::drawCircleOutline(float x, float y, float radius, int nSeg)
     glPopMatrix();
 }
 
-void Graphics::drawRectangle(float x1, float y1, float x2, float y2) {
+void Graphics::drawRectangle(float x1, float y1, float x2, float y2, int r, int g, int b) {
     // Calculate the dimensions of the rectangle
     float width = abs(x2 - x1);
     float height = abs(y2 - y1);
 
     // Translate and rotate to the correct position and orientation
+    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(min(x1, x2), min(y1, y2), 0);
@@ -100,7 +103,8 @@ void Graphics::drawRectangle(float x1, float y1, float x2, float y2) {
     glPopMatrix();
 }
 
-void Graphics::drawLine(GLFWwindow* window, float x1, float y1, float x2, float y2) {
+void Graphics::drawLine(GLFWwindow* window, float x1, float y1, float x2, float y2, int r, int g, int b) {
+    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     // Set the line color to white
@@ -144,7 +148,7 @@ void Graphics::clear(GLFWwindow* window)
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentricity, int num_segments)
+void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentricity, int num_segments, int r, int g, int b )
 {
     // calculate midpoint between two points
     float mx = (cx + cx2) / 2.0;
@@ -157,7 +161,7 @@ void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentric
 
     // calculate semimajor and semiminor axes based on distance and eccentricity
     float a = distance / 2.0;
-    float b = a * sqrt(1.0 - eccentricity * eccentricity);
+    float bb = a * sqrt(1.0 - eccentricity * eccentricity);
 
     // calculate angle between two points
     float angle = atan2(dy, dx);
@@ -170,6 +174,7 @@ void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentric
     float x = 1;//we start at angle = 0 
     float y = 0;
 
+    glColor3f(r / 255.0f, g / 255.0f, bb / 255.0f);
     // translate to center of ellipse
     glTranslatef(mx, my, 0.0f);
 
@@ -181,7 +186,7 @@ void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentric
     for (int ii = 0; ii < num_segments; ii++)
     {
         // apply radius and offset
-        glVertex2f(a * x, b * y);
+        glVertex2f(a * x, bb * y);
 
         // apply the rotation matrix
         t = x;

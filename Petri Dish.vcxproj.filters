@@ -13,6 +13,9 @@
     <ClCompile Include="Graphics.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Game\GameScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2d.h">
@@ -29,6 +32,9 @@
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Game\GameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +61,9 @@
     </Filter>
     <Filter Include="Game\GameObjects">
       <UniqueIdentifier>{e05ea70d-3032-455f-b21e-62a21bf92202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameScene">
+      <UniqueIdentifier>{e04ccc8c-3e28-474a-b83b-f8752aa355f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
