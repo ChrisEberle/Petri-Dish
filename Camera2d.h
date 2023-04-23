@@ -13,6 +13,10 @@ public:
         screenWidth_ = screenWidth;
         screenHeight_ = screenHeight;
     }
+    void setWindowSize(int width, int height) {
+        screenWidth_ = width;
+        screenHeight_ = height;
+    }
     float getCameraX() const;
     float getCameraY() const;
     void setCameraPosition(float x, float y);

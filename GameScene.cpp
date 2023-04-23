@@ -29,9 +29,15 @@ int GameScene::game(int width, int height, Camera2d& cam)
         glfwTerminate();
         return -1;
     }
+    // Set the camera object as the user pointer for the window
+    glfwSetWindowUserPointer(window, &cam);
     // Make the window's context current
     glfwMakeContextCurrent(window);
-    // Register callbacks
+        // Register callbacks
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
     // Event loop
     double prevTime = glfwGetTime();
     while (!glfwWindowShouldClose(window)) {
