@@ -7,8 +7,6 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     // Apply camera transformation
     cam.apply();
     // Draw Game
-   // Graphics::drawTriangle(0, 0, 50, 255, 0, 0);
-    Graphics::drawRectangleWithTexture(0, 0, 1600, 500, 23, 1, 1, "assets/download.jpg");
     // Swap buffers
     glfwSwapBuffers(&window);
 }
