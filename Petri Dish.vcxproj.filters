@@ -16,6 +16,9 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>Game\GameScene</Filter>
     </ClCompile>
+    <ClCompile Include="stb.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2d.h">
@@ -64,6 +67,15 @@
     </Filter>
     <Filter Include="Game\GameScene">
       <UniqueIdentifier>{e04ccc8c-3e28-474a-b83b-f8752aa355f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{ab9840e2-4ec2-42c3-af87-c2a2dde22da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{9574d713-5d68-4646-82c7-ecc89fc71192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{4094b79f-3a7f-4267-9a41-e83f6aa1a94c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
