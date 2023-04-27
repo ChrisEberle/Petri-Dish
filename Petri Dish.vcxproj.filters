@@ -39,6 +39,9 @@
     <ClInclude Include="Graphics.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Colors.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

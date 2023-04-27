@@ -1,6 +1,6 @@
 #include "Engine.h"
 
-void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentricity, int r, int g, int b)
+void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentricity, const float* color)
 {
     // calculate midpoint between two points
     float mx = (cx + cx2) / 2.0;
@@ -26,7 +26,7 @@ void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentric
     float x = 1;//we start at angle = 0 
     float y = 0;
 
-    glColor3f(r / 255.0f, g / 255.0f, bb / 255.0f);
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[3] / 255.0f);
     // translate to center of ellipse
     glTranslatef(mx, my, 0.0f);
 
@@ -48,7 +48,7 @@ void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentric
     glEnd();
 }
 
-void Graphics::ellipseOutline(float cx, float cy, float cx2, float cy2, float eccentricity, int r, int g, int b)
+void Graphics::ellipseOutline(float cx, float cy, float cx2, float cy2, float eccentricity, const float* color)
 {
     // calculate midpoint between two points
     float mx = (cx + cx2) / 2.0;
@@ -74,7 +74,7 @@ void Graphics::ellipseOutline(float cx, float cy, float cx2, float cy2, float ec
     float x = 1;//we start at angle = 0 
     float y = 0;
 
-    glColor3f(r / 255.0f, g / 255.0f, bb / 255.0f);
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     // translate to center of ellipse
     glTranslatef(mx, my, 0.0f);
 
@@ -96,9 +96,9 @@ void Graphics::ellipseOutline(float cx, float cy, float cx2, float cy2, float ec
     glEnd();
 }
 
-void Graphics::circle(float centerX, float centerY, float radius, int nSeg, int r, int g, int b)
+void Graphics::circle(float centerX, float centerY, float radius, int nSeg, const float* color)
 {
-    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(centerX, centerY, 0.0f);
@@ -135,9 +135,9 @@ void Graphics::circleOutline(float centerX, float centerY, float radius) {
     glEnd();
 }
 
-void Graphics::circleTextured(float centerX, float centerY, float radius, int r, int g, int b, const char* imagePath) {
+void Graphics::circleTextured(float centerX, float centerY, float radius, const float* color, const char* imagePath) {
     // Translate and rotate to the correct position and orientation
-    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(centerX, centerY, 0);
@@ -180,9 +180,9 @@ void Graphics::circleTextured(float centerX, float centerY, float radius, int r,
     glDeleteTextures(1, &textureID);
 }
 
-void Graphics::triangle(float centerX, float centerY, float sideLength, int r, int g, int b)
+void Graphics::triangle(float centerX, float centerY, float sideLength, const float* color)
 {
-    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(centerX, centerY, 0.0f);
@@ -201,9 +201,9 @@ void Graphics::triangle(float centerX, float centerY, float sideLength, int r, i
     glPopMatrix();
 }
 
-void Graphics::triangleOutline(float centerX, float centerY, float sideLength, int r, int g, int b)
+void Graphics::triangleOutline(float centerX, float centerY, float sideLength, const float* color)
 {
-    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(centerX, centerY, 0.0f);
@@ -222,9 +222,9 @@ void Graphics::triangleOutline(float centerX, float centerY, float sideLength, i
     glPopMatrix();
 }
 
-void Graphics::triangleTextured(float centerX, float centerY, float sideLength, int r, int g, int b, const char* imagePath) {
+void Graphics::triangleTextured(float centerX, float centerY, float sideLength, const float* color, const char* imagePath) {
     // Translate and rotate to the correct position and orientation
-    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(centerX, centerY, 0);
@@ -268,13 +268,13 @@ void Graphics::triangleTextured(float centerX, float centerY, float sideLength, 
     glDeleteTextures(1, &textureID);
 }
 
-void Graphics::rect(float x1, float y1, float x2, float y2, int r, int g, int b) {
+void Graphics::rect(float x1, float y1, float x2, float y2, const float* color) {
         // Calculate the dimensions of the rectangle
         float width = abs(x2 - x1);
         float height = abs(y2 - y1);
 
         // Translate and rotate to the correct position and orientation
-        glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
+        glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
         glLoadIdentity();
         glPushMatrix();
         glTranslatef(min(x1, x2), min(y1, y2), 0);
@@ -301,14 +301,14 @@ void Graphics::rect(float x1, float y1, float x2, float y2, int r, int g, int b)
         glPopMatrix();
 }
 
-void Graphics::rectOutline(float x1, float y1, float x2, float y2, int r, int g, int b)
+void Graphics::rectOutline(float x1, float y1, float x2, float y2, const float* color)
 {
     // Calculate the dimensions of the rectangle
     float width = abs(x2 - x1);
     float height = abs(y2 - y1);
 
     // Translate and rotate to the correct position and orientation
-    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(min(x1, x2), min(y1, y2), 0);
@@ -335,13 +335,13 @@ void Graphics::rectOutline(float x1, float y1, float x2, float y2, int r, int g,
     glPopMatrix();
 }
 
-void Graphics::rectTextured(float x1, float y1, float x2, float y2, int r, int g, int b, const char* imagePath) {
+void Graphics::rectTextured(float x1, float y1, float x2, float y2, const float* color, const char* imagePath) {
     // Calculate the dimensions of the rectangle
     float width = abs(x2 - x1);
     float height = abs(y2 - y1);
 
     // Translate and rotate to the correct position and orientation
-    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(min(x1, x2), min(y1, y2), 0);
@@ -390,8 +390,8 @@ void Graphics::rectTextured(float x1, float y1, float x2, float y2, int r, int g
     glDeleteTextures(1, &textureID);
 }
 
-void Graphics::drawLine(float x1, float y1, float x2, float y2, int r, int g, int b) {
-    glColor3f(r / 255.0f, g / 255.0f, b / 255.0f);
+void Graphics::drawLine(float x1, float y1, float x2, float y2, const float* color) {
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     // Set the line color to white

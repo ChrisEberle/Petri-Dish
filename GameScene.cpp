@@ -1,5 +1,6 @@
 #include "Engine.h"
 
+
 void GameScene::display(GLFWwindow& window, Camera2d& cam)
 {
     // Clear screen
@@ -7,6 +8,7 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     // Apply camera transformation
     cam.apply();
     // Draw Game
+    Graphics::circleTextured(0, 0, 500, COLOR_RED, "assets/goop.jpg");
     // Swap buffers
     glfwSwapBuffers(&window);
 }
@@ -38,7 +40,6 @@ int GameScene::game(int width, int height, Camera2d& cam)
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
 
-  
   
     // Event loop
     double prevTime = glfwGetTime();
