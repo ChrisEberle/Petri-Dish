@@ -42,6 +42,9 @@
     <ClInclude Include="Colors.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

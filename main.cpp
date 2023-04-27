@@ -1,13 +1,8 @@
 #include "Engine.h"
-
-// Scene object init's
-GameScene gScene;
-// camera init
-Camera2d cam;
+#include "main.h"
 
 int main() {
-    
     // GAME SCENE ~~~~~
-    gScene.game(screenWidth,screenHeight, cam);
+    game_scene.game(screenWidth,screenHeight, game_cam);
     return 0;
 }
