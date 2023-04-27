@@ -6,7 +6,7 @@ public:
     static void ellipse(float cx, float cy, float cx2, float cy2, float eccentricity, const float* color);
     static void ellipseOutline(float cx, float cy, float cx2, float cy2, float eccentricity, const float* color);
     // CIRCLE
-    static void circle(float centerX, float centerY, float radius, int nSeg, const float* color);
+    static void circle(float centerX, float centerY, float radius, const float* color);
     static void circleOutline(float centerX, float centerY, float radius);
     static void circleTextured(float centerX, float centerY, float radius, const float* color, const char* imagePath);
     // TRIANGLE

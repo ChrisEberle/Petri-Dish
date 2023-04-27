@@ -8,7 +8,8 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     // Apply camera transformation
     cam.apply();
     // Draw Game
-    Graphics::circleTextured(0, 0, 500, COLOR_RED, "assets/goop.jpg");
+    //Graphics::circleTextured(0, 0, 500, COLOR_DARKKHAKI, "assets/goop.jpg");
+     Graphics::circle(0, 0, 500, COLOR_FIREBRICK);
     // Swap buffers
     glfwSwapBuffers(&window);
 }

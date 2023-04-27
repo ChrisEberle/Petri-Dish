@@ -96,13 +96,14 @@ void Graphics::ellipseOutline(float cx, float cy, float cx2, float cy2, float ec
     glEnd();
 }
 
-void Graphics::circle(float centerX, float centerY, float radius, int nSeg, const float* color)
+void Graphics::circle(float centerX, float centerY, float radius, const float* color)
 {
     glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
     glTranslatef(centerX, centerY, 0.0f);
 
+    int nSeg = 320;
     const float theta = 2.0f * 3.1415926f / float(nSeg);
     float cos_theta = cosf(theta);
     float sin_theta = sinf(theta);
