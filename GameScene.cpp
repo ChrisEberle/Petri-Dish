@@ -9,6 +9,10 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     // Draw Game
     //Graphics::circleTextured(0, 0, 500, COLOR_DARKKHAKI, "assets/goop.jpg");
      Graphics::circleTextured(0, 0, 300, COLOR_WHITE, textureID2);
+     Graphics::rectangleTextured(-900, -900, -500, -500, COLOR_WHITE, textureID2);
+
+     Graphics::circleOutline(0, 0, 300, COLOR_GREEN);
+     Graphics::rectangleOutline(-900, -900, -500, -500, COLOR_GREEN);
     // Graphics::triangleOutline(0, 0, 550, COLOR_LIME);
     // Swap buffers
     glfwSwapBuffers(&window);
