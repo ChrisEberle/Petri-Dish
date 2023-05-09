@@ -1,6 +1,5 @@
 #include "Engine.h"
 
-
 void GameScene::display(GLFWwindow& window, Camera2d& cam)
 {
     // Clear screen
@@ -9,7 +8,8 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     cam.apply();
     // Draw Game
     //Graphics::circleTextured(0, 0, 500, COLOR_DARKKHAKI, "assets/goop.jpg");
-     Graphics::circle(0, 0, 500, COLOR_FIREBRICK);
+     Graphics::circleTextured(0, 0, 300, COLOR_WHITE, textureID2);
+    // Graphics::triangleOutline(0, 0, 550, COLOR_LIME);
     // Swap buffers
     glfwSwapBuffers(&window);
 }
@@ -41,6 +41,9 @@ int GameScene::game(int width, int height, Camera2d& cam)
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
 
+    // load textures
+    textureID1 = Graphics::loadTexture("assets/goop.jpg");
+    textureID2 = Graphics::loadTexture("assets/space.jpg");
   
     // Event loop
     double prevTime = glfwGetTime();

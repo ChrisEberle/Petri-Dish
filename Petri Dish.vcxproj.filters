@@ -19,6 +19,9 @@
     <ClCompile Include="stb.cpp">
       <Filter>lib</Filter>
     </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Graphics\Text</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2d.h">
@@ -44,6 +47,9 @@
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Graphics\Text</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,9 @@
     </Filter>
     <Filter Include="assets">
       <UniqueIdentifier>{4094b79f-3a7f-4267-9a41-e83f6aa1a94c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Text">
+      <UniqueIdentifier>{0c9458d8-f7c1-45ac-b0d0-2c257a1826f1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

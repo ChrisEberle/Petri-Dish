@@ -9,7 +9,7 @@
 	const float COLOR_GRAY[3] = { 128,128,128 };
 	const float COLOR_CYAN[3] = { 0,255,255 };
 	const float COLOR_SILVER[3] = { 192,192,192 };
-	const float COLOR_MAGENTA[3] = { 255,0,255 };
+	const float COLOR_MAGENTA[3] = { 255,0,255 }; 
 	const float COLOR_MAROON[3] = { 128,0,0 };
 	const float COLOR_OLIVE[3] = { 128,128,0 };
 	const float COLOR_GREEN[3] = { 0,128,0 };

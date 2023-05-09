@@ -7,6 +7,9 @@ public:
     void update(GLFWwindow& window, float deltaTime, Camera2d& cam);
     int game(int width, int height, Camera2d& cam);
 private:
+    unsigned int textureID1;
+    unsigned int textureID2;
+
     static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
         Camera2d* cam = static_cast<Camera2d*>(glfwGetWindowUserPointer(window));
         cam->setWindowSize(width, height);

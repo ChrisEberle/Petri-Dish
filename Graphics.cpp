@@ -1,5 +1,6 @@
 #include "Engine.h"
 
+
 void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentricity, const float* color)
 {
     // calculate midpoint between two points
@@ -121,9 +122,9 @@ void Graphics::circle(float centerX, float centerY, float radius, const float* c
     glPopMatrix();
 }
 
-void Graphics::circleOutline(float centerX, float centerY, float radius) {
+void Graphics::circleOutline(float centerX, float centerY, float radius, const float* color) {
     // Draw the circle outline
-    glColor3f(0.0f, 1.0f, 0.0f);
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glBegin(GL_LINE_LOOP);
     int numSegments = 320;
     float anglePerSegment = 2.0f * M_PI / numSegments;
@@ -136,49 +137,31 @@ void Graphics::circleOutline(float centerX, float centerY, float radius) {
     glEnd();
 }
 
-void Graphics::circleTextured(float centerX, float centerY, float radius, const float* color, const char* imagePath) {
-    // Translate and rotate to the correct position and orientation
+void Graphics::circleTextured(float centerX, float centerY, float radius, const float* color, unsigned int textureID) {
+    // Set the color and bind the texture
     glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
-    glLoadIdentity();
-    glPushMatrix();
-    glTranslatef(centerX, centerY, 0);
-
-    // Load and bind the texture
-    unsigned int textureID;
-    glGenTextures(1, &textureID);
+    glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, textureID);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    int widthImg, heightImg, channels;
-    unsigned char* image = stbi_load(imagePath, &widthImg, &heightImg, &channels, 0);
-    if (image) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImg, heightImg, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-    }
-    else {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(image);
 
     // Draw the textured circle
-    glEnable(GL_TEXTURE_2D);
+    const int numSegments = 100;
+    const float angleStep = 2.0f * M_PI / numSegments;
+
     glBegin(GL_TRIANGLE_FAN);
-    glTexCoord2f(0.5f, 0.5f);
-    glVertex2f(0.0f, 0.0f);
-    int numSegments = 320;
-    float anglePerSegment = 2.0f * M_PI / numSegments;
-    for (int i = 0; i <= numSegments; i++) {
-        float angle = i * anglePerSegment;
-        float x = radius * cos(angle);
-        float y = radius * sin(angle);
-        glTexCoord2f((x + radius) / (2.0f * radius), (y + radius) / (2.0f * radius));
+    glTexCoord2f(0.5f, 0.5f); glVertex2f(centerX, centerY);
+    for (int i = 0; i <= numSegments; ++i) {
+        float angle = i * angleStep;
+        float x = centerX + radius * cos(angle);
+        float y = centerY + radius * sin(angle);
+        float texCoordX = (x - centerX) / radius * 0.5f + 0.5f;
+        float texCoordY = (y - centerY) / radius * 0.5f + 0.5f;
+        glTexCoord2f(texCoordX, texCoordY);
         glVertex2f(x, y);
     }
     glEnd();
+
+    // Disable texture
     glDisable(GL_TEXTURE_2D);
-    glPopMatrix();
-    glDeleteTextures(1, &textureID);
 }
 
 void Graphics::triangle(float centerX, float centerY, float sideLength, const float* color)
@@ -223,50 +206,31 @@ void Graphics::triangleOutline(float centerX, float centerY, float sideLength, c
     glPopMatrix();
 }
 
-void Graphics::triangleTextured(float centerX, float centerY, float sideLength, const float* color, const char* imagePath) {
-    // Translate and rotate to the correct position and orientation
-    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
+void Graphics::triangleTextured(float centerX, float centerY, float sideLength, const float* color, unsigned int textureID) {
+    // Calculate the half side length and height of the equilateral triangle
+    float halfSideLength = sideLength / 2.0f;
+    float height = halfSideLength * sqrt(3.0f);
+
+    // Translate to the center position
     glLoadIdentity();
     glPushMatrix();
-    glTranslatef(centerX, centerY, 0);
+    glTranslatef(centerX, centerY, 0.0f);
 
-    // Load and bind the texture
-    unsigned int textureID;
-    glGenTextures(1, &textureID);
+    // Set the color and bind the texture
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
+    glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, textureID);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    int widthImg, heightImg, channels;
-    unsigned char* image = stbi_load(imagePath, &widthImg, &heightImg, &channels, 0);
-    if (image) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImg, heightImg, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-    }
-    else {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(image);
 
     // Draw the textured triangle
-    glEnable(GL_TEXTURE_2D);
-    const float angle = 2.0f * M_PI / 3; // 3 vertices for a triangle
-    float cosAngle = cosf(angle);
-    float sinAngle = sinf(angle);
-    float h = (sqrt(3) / 2.0f) * sideLength;
-
     glBegin(GL_TRIANGLES);
-    glTexCoord2f(0.5f, 0.0f);
-    glVertex2f(0.0f, h / 2.0f);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex2f(-sideLength / 2.0f, -h / 2.0f);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex2f(sideLength / 2.0f, -h / 2.0f);
+    glTexCoord2f(0.5f, 1.0f); glVertex2f(0.0f, height);
+    glTexCoord2f(0.0f, 0.0f); glVertex2f(-halfSideLength, 0.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex2f(halfSideLength, 0.0f);
     glEnd();
 
+    // Disable texture and restore the matrix
     glDisable(GL_TEXTURE_2D);
     glPopMatrix();
-    glDeleteTextures(1, &textureID);
 }
 
 void Graphics::rect(float x1, float y1, float x2, float y2, const float* color) {
@@ -278,7 +242,8 @@ void Graphics::rect(float x1, float y1, float x2, float y2, const float* color) 
         glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
         glLoadIdentity();
         glPushMatrix();
-        glTranslatef(min(x1, x2), min(y1, y2), 0);
+        glm::vec3 translation = glm::vec3(glm::min(x1, x2), glm::min(y1, y2), 0.0f);
+        glTranslatef(translation.x, translation.y, translation.z);
         if (x2 < x1 && y2 < y1) {
             glRotatef(180, 0, 0, 1);
         }
@@ -312,7 +277,8 @@ void Graphics::rectOutline(float x1, float y1, float x2, float y2, const float* 
     glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
-    glTranslatef(min(x1, x2), min(y1, y2), 0);
+    glm::vec3 translation = glm::vec3(glm::min(x1, x2), glm::min(y1, y2), 0.0f);
+    glTranslatef(translation.x, translation.y, translation.z);
     if (x2 < x1 && y2 < y1) {
         glRotatef(180, 0, 0, 1);
     }
@@ -336,7 +302,7 @@ void Graphics::rectOutline(float x1, float y1, float x2, float y2, const float* 
     glPopMatrix();
 }
 
-void Graphics::rectTextured(float x1, float y1, float x2, float y2, const float* color, const char* imagePath) {
+void Graphics::rectTextured(float x1, float y1, float x2, float y2, const float* color, unsigned int textureID) {
     // Calculate the dimensions of the rectangle
     float width = abs(x2 - x1);
     float height = abs(y2 - y1);
@@ -345,7 +311,8 @@ void Graphics::rectTextured(float x1, float y1, float x2, float y2, const float*
     glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glLoadIdentity();
     glPushMatrix();
-    glTranslatef(min(x1, x2), min(y1, y2), 0);
+    glm::vec3 translation = glm::vec3(glm::min(x1, x2), glm::min(y1, y2), 0.0f);
+    glTranslatef(translation.x, translation.y, translation.z);
     if (x2 < x1 && y2 < y1) {
         glRotatef(180, 0, 0, 1);
     }
@@ -358,27 +325,9 @@ void Graphics::rectTextured(float x1, float y1, float x2, float y2, const float*
         std::swap(width, height);
     }
 
-    // Load and bind the texture
-    unsigned int textureID;
-    glGenTextures(1, &textureID);
-    glBindTexture(GL_TEXTURE_2D, textureID);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    int widthImg, heightImg, channels;
-    unsigned char* image = stbi_load(imagePath, &widthImg, &heightImg, &channels, 0);
-    if (image) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImg, heightImg, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-
-    }
-    else {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(image);
-
     // Draw the textured rectangle
     glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, textureID);
     glBegin(GL_QUADS);
     glTexCoord2f(0.0f, 0.0f); glVertex2f(0.0f, 0.0f);
     glTexCoord2f(1.0f, 0.0f); glVertex2f(width, 0.0f);
@@ -388,7 +337,6 @@ void Graphics::rectTextured(float x1, float y1, float x2, float y2, const float*
     glDisable(GL_TEXTURE_2D);
 
     glPopMatrix();
-    glDeleteTextures(1, &textureID);
 }
 
 void Graphics::drawLine(float x1, float y1, float x2, float y2, const float* color) {
@@ -425,4 +373,26 @@ void Graphics::drawFPS(GLFWwindow* window)
         frameCount = 0;
     }
     frameCount++;
+}
+
+  unsigned int Graphics::loadTexture(const char* imagePath) {
+    int widthImg, heightImg, channels;
+    unsigned char* image = stbi_load(imagePath, &widthImg, &heightImg, &channels, 0);
+    if (image) {
+        unsigned int textureID;
+        glGenTextures(1, &textureID);
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImg, heightImg, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+
+        stbi_image_free(image);
+        return textureID;
+    }
+    else {
+        std::cout << "Failed to load texture: " << imagePath << std::endl;
+        return 0; // Return 0 to indicate failure
+    }
 }
