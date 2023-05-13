@@ -4,15 +4,26 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
 {
     // Clear screen
     glClear(GL_COLOR_BUFFER_BIT);
+
+    // ui window
+
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+    ImGui::Begin("My name is window, imGUI window");
+    ImGui::Text("Hello there adventurer!");
+    ImGui::End();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
     // Apply camera transformation
     cam.apply();
     // Draw Game
     //Graphics::circleTextured(0, 0, 500, COLOR_DARKKHAKI, "assets/goop.jpg");
-     Graphics::circleTextured(0, 0, 300, COLOR_WHITE, textureID2);
-     Graphics::rectangleTextured(-900, -900, -500, -500, COLOR_WHITE, textureID2);
-
-     Graphics::circleOutline(0, 0, 300, COLOR_GREEN);
-     Graphics::rectangleOutline(-900, -900, -500, -500, COLOR_GREEN);
+    Graphics::rectangleTextured(16, 16, 0, 0, COLOR_WHITE, textureA);
+   //  Graphics::rectangleOutline(-900, -900, -500, -500, COLOR_GREEN);
     // Graphics::triangleOutline(0, 0, 550, COLOR_LIME);
     // Swap buffers
     glfwSwapBuffers(&window);
@@ -48,7 +59,15 @@ int GameScene::game(int width, int height, Camera2d& cam)
     // load textures
     textureID1 = Graphics::loadTexture("assets/goop.jpg");
     textureID2 = Graphics::loadTexture("assets/space.jpg");
-  
+    textureA = Graphics::loadTexture("assets/Font/A.jpg");
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 330");
+
     // Event loop
     double prevTime = glfwGetTime();
     while (!glfwWindowShouldClose(window)) {
@@ -61,6 +80,9 @@ int GameScene::game(int width, int height, Camera2d& cam)
         display(*window, cam);
     }
     // Clean up
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
     glfwTerminate();
     return 0;
 }

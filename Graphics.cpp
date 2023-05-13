@@ -414,7 +414,7 @@ unsigned int Graphics::loadTexture(const char* imagePath) {
     }
 }
 
- unsigned char* Graphics::resizeImageData(const unsigned char* imageData, int srcWidth, int srcHeight, int dstWidth, int dstHeight) {
+unsigned char* Graphics::resizeImageData(const unsigned char* imageData, int srcWidth, int srcHeight, int dstWidth, int dstHeight) {
     unsigned char* resizedData = new unsigned char[dstWidth * dstHeight * 3];
     float scaleX = static_cast<float>(srcWidth) / dstWidth;
     float scaleY = static_cast<float>(srcHeight) / dstHeight;
@@ -424,27 +424,37 @@ unsigned int Graphics::loadTexture(const char* imagePath) {
             int srcX = static_cast<int>(x * scaleX);
             int srcY = static_cast<int>(y * scaleY);
 
-            float offsetX = x * scaleX - srcX;
-            float offsetY = y * scaleY - srcY;
+            // Accumulate the pixel values within the filter window
+            float accumR = 0.0f;
+            float accumG = 0.0f;
+            float accumB = 0.0f;
 
-            // Calculate the four neighboring pixels
-            int srcIndexTL = (srcY * srcWidth + srcX) * 3;
-            int srcIndexTR = srcIndexTL + 3;
-            int srcIndexBL = ((srcY + 1) * srcWidth + srcX) * 3;
-            int srcIndexBR = srcIndexBL + 3;
+            for (int fy = 0; fy < 2; ++fy) {
+                for (int fx = 0; fx < 2; ++fx) {
+                    int sampleX = srcX + fx;
+                    int sampleY = srcY + fy;
 
-            // Perform bilinear interpolation
-            for (int channel = 0; channel < 3; ++channel) {
-                float valueTL = imageData[srcIndexTL + channel];
-                float valueTR = imageData[srcIndexTR + channel];
-                float valueBL = imageData[srcIndexBL + channel];
-                float valueBR = imageData[srcIndexBR + channel];
+                    // Wrap around for out-of-bounds samples
+                    sampleX = (sampleX < 0) ? srcWidth - 1 : (sampleX >= srcWidth) ? 0 : sampleX;
+                    sampleY = (sampleY < 0) ? srcHeight - 1 : (sampleY >= srcHeight) ? 0 : sampleY;
 
-                float valueT = valueTL + offsetX * (valueTR - valueTL);
-                float valueB = valueBL + offsetX * (valueBR - valueBL);
-
-                resizedData[(y * dstWidth + x) * 3 + channel] = valueT + offsetY * (valueB - valueT);
+                    int sampleIndex = (sampleY * srcWidth + sampleX) * 3;
+                    accumR += imageData[sampleIndex];
+                    accumG += imageData[sampleIndex + 1];
+                    accumB += imageData[sampleIndex + 2];
+                }
             }
+
+            // Compute the average pixel value within the filter window
+            float averageR = accumR / 4.0f;
+            float averageG = accumG / 4.0f;
+            float averageB = accumB / 4.0f;
+
+            // Assign the average value to the resized pixel
+            int dstIndex = (y * dstWidth + x) * 3;
+            resizedData[dstIndex] = static_cast<unsigned char>(averageR);
+            resizedData[dstIndex + 1] = static_cast<unsigned char>(averageG);
+            resizedData[dstIndex + 2] = static_cast<unsigned char>(averageB);
         }
     }
 

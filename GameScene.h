@@ -7,8 +7,10 @@ public:
     void update(GLFWwindow& window, float deltaTime, Camera2d& cam);
     int game(int width, int height, Camera2d& cam);
 private:
+    // texture ID's
     unsigned int textureID1;
     unsigned int textureID2;
+    unsigned int textureA;
 
     static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
         Camera2d* cam = static_cast<Camera2d*>(glfwGetWindowUserPointer(window));
@@ -36,4 +38,3 @@ private:
         cam->handleMouseButton(window, button, action, mods);
     }
 };
-

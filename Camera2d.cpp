@@ -26,9 +26,9 @@ void Camera2d::apply()
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-
     // Apply camera position and zoom
     glOrtho(cameraX_ - screenWidth_ / 2.0f / zoom_, cameraX_ + screenWidth_ / 2.0f / zoom_, cameraY_ - screenHeight_ / 2.0f / zoom_, cameraY_ + screenHeight_ / 2.0f / zoom_, -1.0f, 1.0f);
+
     // Apply translation
     glTranslatef(cameraX_, cameraY_, 0.0f);
 
