@@ -19,6 +19,7 @@ public:
     }
     float getCameraX() const;
     float getCameraY() const;
+    ImVec2 getPosition() const;
     void setCameraPosition(float x, float y);
     void zoom(float factor);
     void apply();

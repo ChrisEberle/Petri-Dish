@@ -1,7 +1,9 @@
 // CPP libraries
 #include <iostream>
+#include <vector>
 #include <Windows.h>
 #include <map>
+#include <sstream>
 
 
 // Imported Libraries
@@ -18,3 +20,5 @@
 #include "Graphics.h"
 #include "Camera2d.h"
 #include "GameScene.h"
+#include "TextureManager.h"
+#include "IMGUIUI.h"

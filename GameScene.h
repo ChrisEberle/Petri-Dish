@@ -6,11 +6,15 @@ public:
     void display(GLFWwindow& window, Camera2d& cam);
     void update(GLFWwindow& window, float deltaTime, Camera2d& cam);
     int game(int width, int height, Camera2d& cam);
+    float rx = 3240, ry = 40, rw = 30, rh = 520;
+    float vars[4] = { rx,ry,rw,rh };
 private:
+
     // texture ID's
-    unsigned int textureID1;
-    unsigned int textureID2;
-    unsigned int textureA;
+    unsigned int goopTexture;
+    unsigned int spaceTexture;
+    unsigned int aTexture;
+
 
     static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
         Camera2d* cam = static_cast<Camera2d*>(glfwGetWindowUserPointer(window));

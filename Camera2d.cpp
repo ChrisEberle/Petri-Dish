@@ -10,6 +10,11 @@ float Camera2d::getCameraY() const
     return cameraY_;
 }
 
+ImVec2 Camera2d::getPosition() const
+{
+    return ImVec2(cameraX_, cameraY_);
+}
+
 void Camera2d::setCameraPosition(float x, float y)
 {
     cameraX_ = x;

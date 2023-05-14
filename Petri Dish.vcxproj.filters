@@ -40,6 +40,12 @@
     <ClCompile Include="imgui\imgui_demo.cpp">
       <Filter>src\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="IMGUIUI.cpp">
+      <Filter>UI\Dev Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2d.h">
@@ -93,6 +99,12 @@
     <ClInclude Include="imgui\imgui_impl_opengl3_loader.h">
       <Filter>src\imgui\hdr</Filter>
     </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="IMGUIUI.h">
+      <Filter>UI\Dev Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">
@@ -136,6 +148,12 @@
     </Filter>
     <Filter Include="src\imgui\hdr">
       <UniqueIdentifier>{7d439543-9a66-40dd-a3a3-6234a78f2e8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{0d626a76-5067-42ad-83ed-08e845548fc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Dev Tools">
+      <UniqueIdentifier>{8a00748d-0640-4b5e-90ae-1ed03a6fb98a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

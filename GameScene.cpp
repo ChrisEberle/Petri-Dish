@@ -5,26 +5,14 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     // Clear screen
     glClear(GL_COLOR_BUFFER_BIT);
 
+    Graphics::rectangleTextured(0, 0, 500, 500, COLOR_WHITE, goopTexture);
+
     // ui window
-
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
-
-    ImGui::Begin("My name is window, imGUI window");
-    ImGui::Text("Hello there adventurer!");
-    ImGui::End();
-
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+     IMGUIUI::ui_tools("Developer Tools", rx,ry,rw,rh,rx);
+    
 
     // Apply camera transformation
     cam.apply();
-    // Draw Game
-    //Graphics::circleTextured(0, 0, 500, COLOR_DARKKHAKI, "assets/goop.jpg");
-    Graphics::rectangleTextured(16, 16, 0, 0, COLOR_WHITE, textureA);
-   //  Graphics::rectangleOutline(-900, -900, -500, -500, COLOR_GREEN);
-    // Graphics::triangleOutline(0, 0, 550, COLOR_LIME);
     // Swap buffers
     glfwSwapBuffers(&window);
 }
@@ -57,9 +45,9 @@ int GameScene::game(int width, int height, Camera2d& cam)
     glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     // load textures
-    textureID1 = Graphics::loadTexture("assets/goop.jpg");
-    textureID2 = Graphics::loadTexture("assets/space.jpg");
-    textureA = Graphics::loadTexture("assets/Font/A.jpg");
+    goopTexture = TextureManager::loadTexture("assets/goop.jpg");
+    spaceTexture = TextureManager::loadTexture("assets/space.jpg");
+    aTexture = TextureManager::loadTexture("assets/Font/A.jpg");
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -80,9 +68,7 @@ int GameScene::game(int width, int height, Camera2d& cam)
         display(*window, cam);
     }
     // Clean up
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
+    IMGUIUI::clean_scene();
     glfwTerminate();
     return 0;
 }
