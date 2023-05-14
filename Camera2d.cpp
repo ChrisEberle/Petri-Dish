@@ -50,21 +50,37 @@ void Camera2d::apply()
 void Camera2d::handleMouseInput(GLFWwindow* window, double xpos, double ypos)
 {
     if (isDragging_) {
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
-            // Calculate rotation amount based on mouse movement
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+       //   // Calculate rotation amount based on mouse movement
+       //   float deltaX = xpos - lastMouseX_;
+       //   float deltaY = ypos - lastMouseY_;
+       //   float sensitivity = 0.1f;
+       //   float rotationAmount = deltaX * sensitivity;
+       //
+       //   // Update rotation angle
+       //   rotation_ += rotationAmount;
+       //   if (rotation_ > 360.0f) {
+       //       rotation_ -= 360.0f;
+       //   }
+       //   else if (rotation_ < 0.0f) {
+       //       rotation_ += 360.0f;
+       //   }
+        }
+        else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+            // Calculate camera movement based on mouse movement
             float deltaX = xpos - lastMouseX_;
             float deltaY = ypos - lastMouseY_;
-            float sensitivity = 0.1f;
-            float rotationAmount = deltaX * sensitivity;
+            float speed = 0.5f / zoom_; // Calculate speed based on zoom level
 
-            // Update rotation angle
-            rotation_ += rotationAmount;
-            if (rotation_ > 360.0f) {
-                rotation_ -= 360.0f;
-            }
-            else if (rotation_ < 0.0f) {
-                rotation_ += 360.0f;
-            }
+            // Apply inverse camera rotation to the mouse movement vector
+            float rotationRad = glm::radians(rotation_);
+            float cosTheta = std::cos(rotationRad);
+            float sinTheta = std::sin(rotationRad);
+            float translatedDeltaX = deltaX * cosTheta + deltaY * sinTheta;
+            float translatedDeltaY = -deltaX * sinTheta + deltaY * cosTheta;
+
+            cameraX_ -= translatedDeltaX * speed; // Translate in the X-axis
+            cameraY_ += translatedDeltaY * speed; // Translate in the Y-axis
         }
         else {
             // Calculate camera movement based on mouse movement
@@ -83,7 +99,13 @@ void Camera2d::handleMouseInput(GLFWwindow* window, double xpos, double ypos)
 void Camera2d::handleMouseButton(GLFWwindow* window, int button, int action, int mods)
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        // ...
+        if (action == GLFW_PRESS) {
+            isDragging_ = true;
+            glfwGetCursorPos(window, &lastMouseX_, &lastMouseY_);
+        }
+        else if (action == GLFW_RELEASE) {
+            isDragging_ = false;
+        }
     }
     else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
         if (action == GLFW_PRESS) {
@@ -95,5 +117,3 @@ void Camera2d::handleMouseButton(GLFWwindow* window, int button, int action, int
         }
     }
 }
-
-

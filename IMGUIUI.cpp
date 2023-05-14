@@ -18,11 +18,11 @@ void IMGUIUI::ui_tools(std::string str, float& var1, float& var2, float& var3, f
 
     ImGui::Text("Modifiable Variables");
                                                                  
-    ImGui::InputFloat("Var 1", &var1, 0.1f, 1.0f);
-    ImGui::InputFloat("Var 2", &var2, 0.1f, 1.0f);
-    ImGui::InputFloat("Var 3", &var3, 0.1f, 1.0f);
-    ImGui::InputFloat("Var 4", &var4, 0.1f, 1.0f);
-    ImGui::InputFloat("Var 5", &var5, 0.1f, 1.0f);
+    ImGui::InputFloat("Var 1", &var1, 10.0f, 1000.0f);
+    ImGui::InputFloat("Var 2", &var2, 10.0f, 1000.0f);
+    ImGui::InputFloat("Var 3", &var3, 10.0f, 1000.0f);
+    ImGui::InputFloat("Var 4", &var4, 10.0f, 1000.0f);
+    ImGui::InputFloat("Var 5", &var5, 10.0f, 1000.0f);
 
 
     ImGui::End();

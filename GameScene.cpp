@@ -10,7 +10,6 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     // ui window
      IMGUIUI::ui_tools("Developer Tools", rx,ry,rw,rh,rx);
     
-
     // Apply camera transformation
     cam.apply();
     // Swap buffers
@@ -20,7 +19,7 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
 void GameScene::update(GLFWwindow& window, float deltaTime, Camera2d& cam)
 {
     // Update camera position
-    cam.setCameraPosition(0, 0);
+   
 }
 
 int GameScene::game(int width, int height, Camera2d& cam)
@@ -55,6 +54,8 @@ int GameScene::game(int width, int height, Camera2d& cam)
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
+
+    cam.setCameraPosition(0, 0);
 
     // Event loop
     double prevTime = glfwGetTime();
