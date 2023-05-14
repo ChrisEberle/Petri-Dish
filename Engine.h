@@ -5,7 +5,6 @@
 #include <map>
 #include <sstream>
 
-
 // Imported Libraries
 #include "imgui.h"
 #include "imgui_impl_glfw.h"

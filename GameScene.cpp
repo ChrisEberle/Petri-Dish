@@ -5,21 +5,20 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     // Clear screen
     glClear(GL_COLOR_BUFFER_BIT);
 
+    // objects
     Graphics::rectangleTextured(0, 0, 500, 500, COLOR_WHITE, goopTexture);
 
     // ui window
      IMGUIUI::ui_tools("Developer Tools", rx,ry,rw,rh,rx);
     
-    // Apply camera transformation
-    cam.apply();
     // Swap buffers
     glfwSwapBuffers(&window);
 }
 
 void GameScene::update(GLFWwindow& window, float deltaTime, Camera2d& cam)
 {
-    // Update camera position
-   
+    // Apply camera transformation
+    cam.apply();
 }
 
 int GameScene::game(int width, int height, Camera2d& cam)
@@ -37,7 +36,7 @@ int GameScene::game(int width, int height, Camera2d& cam)
     glfwSetWindowUserPointer(window, &cam);
     // Make the window's context current
     glfwMakeContextCurrent(window);
-        // Register callbacks
+    // Register callbacks
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
@@ -48,13 +47,10 @@ int GameScene::game(int width, int height, Camera2d& cam)
     spaceTexture = TextureManager::loadTexture("assets/space.jpg");
     aTexture = TextureManager::loadTexture("assets/Font/A.jpg");
 
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    ImGui::StyleColorsDark();
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 330");
+    // initialize imgui
+    IMGUIUI::init_scene(window);
 
+    //initialize camera starting position
     cam.setCameraPosition(0, 0);
 
     // Event loop

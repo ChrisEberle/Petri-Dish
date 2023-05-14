@@ -15,7 +15,6 @@ private:
     unsigned int spaceTexture;
     unsigned int aTexture;
 
-
     static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
         Camera2d* cam = static_cast<Camera2d*>(glfwGetWindowUserPointer(window));
         cam->setWindowSize(width, height);
