@@ -34,6 +34,12 @@ void IMGUIUI::ui_tools(std::string str, float& var1, float& var2, float& var3, f
     ImGui::InputFloat("Var 4", &var4, 10.0f, 1000.0f);
     ImGui::InputFloat("Var 5", &var5, 10.0f, 1000.0f);
 
+    ImGui::Text("");
+
+    // Display FPS
+    ImGuiIO& io = ImGui::GetIO();
+    float fps = io.Framerate;
+    ImGui::Text("FPS: %.1f", fps);
 
     ImGui::End();
 
