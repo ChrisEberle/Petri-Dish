@@ -19,7 +19,7 @@ void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentric
     // calculate angle between two points
     float angle = atan2(dy, dx);
     int num_segments = 320;
-    float theta = 2 * M_PI / float(num_segments);
+    float theta = 2 * M_PIE / float(num_segments);
     float c = cos(theta);//precalculate the sine and cosine
     float s = sin(theta);
     float t;
@@ -32,7 +32,7 @@ void Graphics::ellipse(float cx, float cy, float cx2, float cy2, float eccentric
     glTranslatef(mx, my, 0.0f);
 
     // rotate to align with two points
-    glRotatef(angle * 180.0 / M_PI, 0.0, 0.0, 1.0);
+    glRotatef(angle * 180.0 / M_PIE, 0.0, 0.0, 1.0);
 
     // draw ellipse
     glBegin(GL_TRIANGLE_FAN);
@@ -67,7 +67,7 @@ void Graphics::ellipseOutline(float cx, float cy, float cx2, float cy2, float ec
     // calculate angle between two points
     float angle = atan2(dy, dx);
     int num_segments = 320;
-    float theta = 2 * M_PI / float(num_segments);
+    float theta = 2 * M_PIE / float(num_segments);
     float c = cos(theta);//precalculate the sine and cosine
     float s = sin(theta);
     float t;
@@ -80,7 +80,7 @@ void Graphics::ellipseOutline(float cx, float cy, float cx2, float cy2, float ec
     glTranslatef(mx, my, 0.0f);
 
     // rotate to align with two points
-    glRotatef(angle * 180.0 / M_PI, 0.0, 0.0, 1.0);
+    glRotatef(angle * 180.0 / M_PIE, 0.0, 0.0, 1.0);
 
     // draw ellipse
     glBegin(GL_LINE_LOOP);
@@ -127,7 +127,7 @@ void Graphics::circleOutline(float centerX, float centerY, float radius, const f
     glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glBegin(GL_LINE_LOOP);
     int numSegments = 320;
-    float anglePerSegment = 2.0f * M_PI / numSegments;
+    float anglePerSegment = 2.0f * M_PIE / numSegments;
     for (int i = 0; i <= numSegments; i++) {
         float angle = i * anglePerSegment;
         float x = radius * cos(angle);
@@ -145,7 +145,7 @@ void Graphics::circleTextured(float centerX, float centerY, float radius, const 
 
     // Draw the textured circle
     const int numSegments = 100;
-    const float angleStep = 2.0f * M_PI / numSegments;
+    const float angleStep = 2.0f * M_PIE / numSegments;
 
     glBegin(GL_TRIANGLE_FAN);
     glTexCoord2f(0.5f, 0.5f); glVertex2f(centerX, centerY);
