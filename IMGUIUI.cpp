@@ -17,7 +17,7 @@ void IMGUIUI::clean_scene()
     ImGui::DestroyContext();
 }
 
-void IMGUIUI::ui_tools(std::string str, float& var1, float& var2, float& var3, float& var4, float& var5)
+void IMGUIUI::ui_tools(std::string str, float& var1, float& var2, float& var3, float& var4, float& var5, Mix_Music* music)
 {
     
     ImGui_ImplOpenGL3_NewFrame();
@@ -33,6 +33,21 @@ void IMGUIUI::ui_tools(std::string str, float& var1, float& var2, float& var3, f
     ImGui::InputFloat("Var 3", &var3, 10.0f, 1000.0f);
     ImGui::InputFloat("Var 4", &var4, 10.0f, 1000.0f);
     ImGui::InputFloat("Var 5", &var5, 10.0f, 1000.0f);
+
+    ImGui::Text("MUSIC");
+
+
+    // Create a button in ImGui
+
+    if (ImGui::Button("Stop Music")) {
+        Mix_HaltMusic();
+    }
+
+    if (ImGui::Button("Play Music")) {
+        Mix_PlayMusic(music, -1); // -1 means loop indefinitely
+    }
+
+    // Create a button in ImGui
 
     ImGui::Text("");
 

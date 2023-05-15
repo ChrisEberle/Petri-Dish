@@ -5,9 +5,12 @@
 #include <map>
 #include <sstream>
 #include <thread>
+#include <mutex>
+
 
 // Imported Libraries
 #include <SDL.h>
+#include <SDL2_mixer/SDL_mixer.h>
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -25,3 +28,4 @@
 #include "TextureManager.h"
 #include "IMGUIUI.h"
 #include "AudioPlayer.h"
+

@@ -8,8 +8,10 @@ public:
     int game(int width, int height, Camera2d& cam);
     float rx = 3240, ry = 40, rw = 30, rh = 520;
     float vars[4] = { rx,ry,rw,rh };
+    
 private:
-
+    // Load the WAV audio file
+    Mix_Music* song1;
     // texture ID's
     unsigned int goopTexture;
     unsigned int spaceTexture;

@@ -9,7 +9,7 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     Graphics::rectangleTextured(0, 0, 500, 500, COLOR_WHITE, goopTexture);
 
     // ui window
-     IMGUIUI::ui_tools("Developer Tools", rx,ry,rw,rh,rx);
+     IMGUIUI::ui_tools("Developer Tools", rx,ry,rw,rh,rx, song1);
     
     // Swap buffers
     glfwSwapBuffers(&window);
@@ -47,6 +47,9 @@ int GameScene::game(int width, int height, Camera2d& cam)
     spaceTexture = TextureManager::loadTexture("assets/space.jpg");
     aTexture = TextureManager::loadTexture("assets/Font/A.jpg");
 
+    // load audio files
+    song1 = Mix_LoadMUS("audio/music/song1.wav");
+
     // initialize imgui
     IMGUIUI::init_scene(window);
 
@@ -64,6 +67,7 @@ int GameScene::game(int width, int height, Camera2d& cam)
         update(*window, 60, cam);
         display(*window, cam);
     }
+    
     // Clean up
     IMGUIUI::clean_scene();
     glfwTerminate();

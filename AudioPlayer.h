@@ -12,6 +12,7 @@ public:
         SDL_Quit();
     }
 
-    void playWav(const char* filePath);
+   static void init();
+   static void clean();
 };
 
