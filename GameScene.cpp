@@ -6,8 +6,7 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     glClear(GL_COLOR_BUFFER_BIT);
 
     // objects
-    //Graphics::rectangleTextured(0, 0, 2000, 1940, COLOR_WHITE, boomTexture);
-    Graphics::drawTexturePng(birdTexture, 50000, 50000);
+    Graphics::drawTexture(spaceTexture, 500, 500, 0, 0);
 
     // ui window
      IMGUIUI::ui_tools("Developer Tools", rx,ry,rw,rh,rx, song1,effect1);
