@@ -6,11 +6,11 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     glClear(GL_COLOR_BUFFER_BIT);
 
     // objects
-    Graphics::rectangleTextured(0, 0, 500, 500, COLOR_WHITE, goopTexture);
+    //Graphics::rectangleTextured(0, 0, 2000, 1940, COLOR_WHITE, boomTexture);
+    Graphics::drawTexturePng(birdTexture, 50000, 50000);
 
     // ui window
-     IMGUIUI::ui_tools("Developer Tools", rx,ry,rw,rh,rx, song1);
-    
+     IMGUIUI::ui_tools("Developer Tools", rx,ry,rw,rh,rx, song1,effect1);
     // Swap buffers
     glfwSwapBuffers(&window);
 }
@@ -43,12 +43,15 @@ int GameScene::game(int width, int height, Camera2d& cam)
     glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     // load textures
-    goopTexture = TextureManager::loadTexture("assets/goop.jpg");
-    spaceTexture = TextureManager::loadTexture("assets/space.jpg");
-    aTexture = TextureManager::loadTexture("assets/Font/A.jpg");
+    goopTexture = TextureManager::loadTextureJPEG("assets/goop.jpg");
+    spaceTexture = TextureManager::loadTextureJPEG("assets/space.jpg");
+    aTexture = TextureManager::loadTextureJPEG("assets/Font/A.jpg");
+    birdTexture = TextureManager::loadTexturePNG("assets/bird.png");
+    boomTexture = TextureManager::loadTexturePNG("assets/boom.png");
 
     // load audio files
     song1 = Mix_LoadMUS("audio/music/song1.wav");
+    effect1 = Mix_LoadWAV("audio/soundeffects/retro1.wav");
 
     // initialize imgui
     IMGUIUI::init_scene(window);

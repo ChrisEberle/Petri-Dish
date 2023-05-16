@@ -12,10 +12,15 @@ public:
 private:
     // Load the WAV audio file
     Mix_Music* song1;
+    Mix_Chunk* effect1;
     // texture ID's
+    // JPEGS
     unsigned int goopTexture;
     unsigned int spaceTexture;
     unsigned int aTexture;
+    //PNGS
+    unsigned int birdTexture;
+    unsigned int boomTexture;
 
     static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
         Camera2d* cam = static_cast<Camera2d*>(glfwGetWindowUserPointer(window));

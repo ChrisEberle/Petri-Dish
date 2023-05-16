@@ -308,11 +308,8 @@ void Graphics::rectangleTextured(float x1, float y1, float x2, float y2, const f
     float height = abs(y2 - y1);
 
     // Translate and rotate to the correct position and orientation
-    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
-    glLoadIdentity();
     glPushMatrix();
-    glm::vec3 translation = glm::vec3(glm::min(x1, x2), glm::min(y1, y2), 0.0f);
-    glTranslatef(translation.x, translation.y, translation.z);
+    glTranslatef(glm::min(x1, x2), glm::min(y1, y2), 0.0f);
     if (x2 < x1 && y2 < y1) {
         glRotatef(180, 0, 0, 1);
     }
@@ -326,6 +323,7 @@ void Graphics::rectangleTextured(float x1, float y1, float x2, float y2, const f
     }
 
     // Draw the textured rectangle
+    glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, textureID);
     glBegin(GL_QUADS);

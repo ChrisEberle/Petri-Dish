@@ -7,7 +7,6 @@
 #include <thread>
 #include <mutex>
 
-
 // Imported Libraries
 #include <SDL.h>
 #include <SDL2_mixer/SDL_mixer.h>
@@ -28,4 +27,3 @@
 #include "TextureManager.h"
 #include "IMGUIUI.h"
 #include "AudioPlayer.h"
-

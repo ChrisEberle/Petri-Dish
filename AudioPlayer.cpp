@@ -17,5 +17,5 @@ void AudioPlayer::clean()
     Mix_CloseAudio();
     Mix_Quit();
     SDL_Quit();
-    std::cout << "SDL_MIXER audi player has been cleaned" << std::endl;
+    std::cout << "SDL_MIXER audio player has been cleaned" << std::endl;
 }
