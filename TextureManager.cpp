@@ -58,3 +58,16 @@ unsigned int TextureManager::loadTexturePNG(const char* imagePath)
     std::cout << "Successfully loaded texture: " << imagePath << std::endl;
     return textureID;
 }
+
+void TextureManager::textureAnimation(unsigned int textArray[], int sizeOfArray, int width, int height, float xPos, float yPos, int speed)
+{
+    static int counter = 0; // static variable to remember the current counter
+    int textureIndex = (counter / (speed / sizeOfArray)) % sizeOfArray;
+
+    Graphics::drawTexture(textArray[textureIndex], width, height, xPos, yPos);
+
+    counter++;
+    if (counter >= speed * sizeOfArray) {
+        counter = 0;
+    }
+}

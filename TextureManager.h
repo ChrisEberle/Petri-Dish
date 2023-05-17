@@ -6,5 +6,6 @@ public:
 	}
 	static unsigned int loadTextureJPEG(const char* imagePath);
 	static unsigned int loadTexturePNG(const char* imagePath);
+	static void textureAnimation(unsigned int textArray[], int sizeOfArray, int width, int height, float xPos, float yPos, int speed);
 private:
 };

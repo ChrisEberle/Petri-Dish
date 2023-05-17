@@ -17,7 +17,7 @@ void IMGUIUI::clean_scene()
     ImGui::DestroyContext();
 }
 
-void IMGUIUI::ui_tools(std::string str, float& var1, float& var2, float& var3, float& var4, float& var5, Mix_Music* music, Mix_Chunk* effect)
+void IMGUIUI::ui_tools(std::string str, float& var1, float& var2, float& var3, float& var4, int& var5, Mix_Music* music, Mix_Chunk* effect)
 {
     
     ImGui_ImplOpenGL3_NewFrame();
@@ -32,7 +32,7 @@ void IMGUIUI::ui_tools(std::string str, float& var1, float& var2, float& var3, f
     ImGui::InputFloat("Var 2", &var2, 10.0f, 1000.0f);
     ImGui::InputFloat("Var 3", &var3, 10.0f, 1000.0f);
     ImGui::InputFloat("Var 4", &var4, 10.0f, 1000.0f);
-    ImGui::InputFloat("Var 5", &var5, 10.0f, 1000.0f);
+    ImGui::InputInt("Var 5", &var5, 10.0f, 1000.0f);
 
     ImGui::Text("MUSIC");
 
