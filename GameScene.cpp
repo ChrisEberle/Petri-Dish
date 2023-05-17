@@ -6,7 +6,6 @@ void GameScene::display(GLFWwindow& window, Camera2d& cam)
     glClear(GL_COLOR_BUFFER_BIT);
 
     // objects
-    //Graphics::drawTexture(boomTexture, 500, 500, 0, 0);
     int arraysize = sizeof(textures) / sizeof(textures[0]);
 
     TextureManager::textureAnimation(textures, arraysize, 500, 500, 0, 0, tracker);
@@ -25,6 +24,7 @@ void GameScene::update(GLFWwindow& window, float deltaTime, Camera2d& cam)
 
 int GameScene::game(int width, int height, Camera2d& cam)
 {
+    AudioPlayer::init();
     // Initialize GLFW
     glfwInit();
     // Disable VSync
@@ -45,7 +45,6 @@ int GameScene::game(int width, int height, Camera2d& cam)
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
-
     // load textures
     textures[0] =  TextureManager::loadTexturePNG("assets/boom.png");
     textures[1] =  TextureManager::loadTexturePNG("assets/bird.png");
@@ -56,10 +55,8 @@ int GameScene::game(int width, int height, Camera2d& cam)
     // load audio files
     song1 = Mix_LoadMUS("audio/music/song1.wav");
     effect1 = Mix_LoadWAV("audio/soundeffects/retro1.wav");
-
     // initialize imgui
     IMGUIUI::init_scene(window);
-
     //initialize camera starting position
     cam.setCameraPosition(0, 0);
 
@@ -74,8 +71,8 @@ int GameScene::game(int width, int height, Camera2d& cam)
         update(*window, 60, cam);
         display(*window, cam);
     }
-    
     // Clean up
+    AudioPlayer::clean();
     IMGUIUI::clean_scene();
     glfwTerminate();
     return 0;

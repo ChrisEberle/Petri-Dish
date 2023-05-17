@@ -2,8 +2,7 @@
 
 class Graphics {
 public:
-    // SHAPES
-    
+                                            // SHAPES
     // ELLIPSE
     static void ellipse(float cx, float cy, float cx2, float cy2, float eccentricity, const float* color);
     static void ellipseOutline(float cx, float cy, float cx2, float cy2, float eccentricity, const float* color);
@@ -23,7 +22,7 @@ public:
     static void drawLine(float x1, float y1, float x2, float y2, const float* color);
     // FPS
     static void drawFPS(GLFWwindow* window);
-
+                                             // TEXTURES
     static void drawTexture(unsigned int texture, int width, int height, float originX, float originY);
 private:
 };

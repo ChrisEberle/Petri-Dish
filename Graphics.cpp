@@ -137,53 +137,6 @@ void Graphics::circleOutline(float centerX, float centerY, float radius, const f
     glEnd();
 }
 
-void Graphics::drawTexture(unsigned int texture, int width, int height, float originX, float originY)
-{
-        // Enable alpha blending
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-        // Enable texture functionality
-        glEnable(GL_TEXTURE_2D);
-
-        // Bind the texture
-        glBindTexture(GL_TEXTURE_2D, texture);
-
-        // Clear the screen
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        // Calculate the aspect ratio of the texture
-        float aspectRatio = static_cast<float>(width) / height;
-
-        // Calculate the quad's dimensions based on the aspect ratio
-        float quadWidth = 2.0f;
-        float quadHeight = 2.0f / aspectRatio;
-
-        // Calculate the quad's position based on the specified origin
-        float quadX = originX - quadWidth / 2.0f;
-        float quadY = originY - quadHeight / 2.0f;
-
-        // Enable alpha testing for transparent pixels
-        glEnable(GL_ALPHA_TEST);
-        glAlphaFunc(GL_GREATER, 0.0f);
-
-        // Draw a quad with the texture
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex2f(quadX, quadY);
-        glTexCoord2f(1, 0);
-        glVertex2f(quadX + quadWidth, quadY);
-        glTexCoord2f(1, 1);
-        glVertex2f(quadX + quadWidth, quadY + quadHeight);
-        glTexCoord2f(0, 1);
-        glVertex2f(quadX, quadY + quadHeight);
-        glEnd();
-
-        // Disable alpha testing and blending
-        glDisable(GL_ALPHA_TEST);
-        glDisable(GL_BLEND);
-}
-
 void Graphics::circleTextured(float centerX, float centerY, float radius, const float* color, unsigned int textureID) {
     // Set the color and bind the texture
     glColor3f(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f);
@@ -418,4 +371,51 @@ void Graphics::drawFPS(GLFWwindow* window)
         frameCount = 0;
     }
     frameCount++;
+}
+
+void Graphics::drawTexture(unsigned int texture, int width, int height, float originX, float originY)
+{
+    // Enable alpha blending
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    // Enable texture functionality
+    glEnable(GL_TEXTURE_2D);
+
+    // Bind the texture
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    // Clear the screen
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Calculate the aspect ratio of the texture
+    float aspectRatio = static_cast<float>(width) / height;
+
+    // Calculate the quad's dimensions based on the aspect ratio
+    float quadWidth = 2.0f;
+    float quadHeight = 2.0f / aspectRatio;
+
+    // Calculate the quad's position based on the specified origin
+    float quadX = originX - quadWidth / 2.0f;
+    float quadY = originY - quadHeight / 2.0f;
+
+    // Enable alpha testing for transparent pixels
+    glEnable(GL_ALPHA_TEST);
+    glAlphaFunc(GL_GREATER, 0.0f);
+
+    // Draw a quad with the texture
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex2f(quadX, quadY);
+    glTexCoord2f(1, 0);
+    glVertex2f(quadX + quadWidth, quadY);
+    glTexCoord2f(1, 1);
+    glVertex2f(quadX + quadWidth, quadY + quadHeight);
+    glTexCoord2f(0, 1);
+    glVertex2f(quadX, quadY + quadHeight);
+    glEnd();
+
+    // Disable alpha testing and blending
+    glDisable(GL_ALPHA_TEST);
+    glDisable(GL_BLEND);
 }
